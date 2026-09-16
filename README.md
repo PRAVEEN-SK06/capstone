@@ -15,9 +15,9 @@ answers stay verifiable instead of relying on the model's own memory.
 walkthrough and comparisons):
 - PDF loading & per-page text extraction (`src/ingestion.py`)
 - 3 chunking strategies compared: fixed-size, recursive character splitting, semantic chunking
-- 2 embedding models compared: HuggingFace `BAAI/bge-small-en-v1.5` (local, free) and Google `text-embedding-004` (commercial)
+- 2 embedding models compared: HuggingFace `BAAI/bge-small-en-v1.5` (local, free) and Google `gemini-embedding-001` (commercial)
 - 4 retrieval strategies compared: dense cosine, MMR, hybrid (BM25 + dense via reciprocal rank fusion), hybrid + cross-encoder reranker
-- Full RAG pipeline (Gemini 2.0 Flash) returning top-3 cited passages with paper title + page number
+- Full RAG pipeline (Gemini Flash, see `src/config.py` for the exact pinned snapshot) returning top-3 cited passages with paper title + page number
 - Evaluation harness over 12 test questions, including an LLM-as-judge groundedness/relevance score and one deliberately unanswerable question to test hallucination refusal
 
 **Stretch goals implemented:**
