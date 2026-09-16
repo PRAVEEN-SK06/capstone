@@ -1,0 +1,51 @@
+id,type,question,expected_source,source_retrieved_correctly,answer,groundedness,relevance,embedding,strategy
+q1,factual,What are the two main pretraining tasks used to train BERT?,BERT.pdf,True,I don't know based on the provided papers.,5,5,huggingface,hybrid
+q2,conceptual,How does BERT's architecture differ from standard left-to-right language models like GPT?,BERT.pdf,True,"Based on the provided passages, BERT's architecture differs from OpenAI GPT in the following ways:
+
+* **Bidirectional vs. Unidirectional Context:** BERT uses a deep bidirectional Transformer architecture where representations are jointly conditioned on both left and right context in all layers. In contrast, GPT uses a left-to-right (unidirectional) Transformer architecture.
+* **Self-Attention Restrictions:** In GPT's left-to-right architecture, every token can only attend to previous tokens in the self-attention layers, whereas BERT alleviates this unidirectionality constraint by using a ""masked language model"" (MLM) pre-training objective.",5,5,huggingface,hybrid
+q5,conceptual,Why did the Transformer architecture in 'Attention Is All You Need' remove recurrence and convolutions entirely?,Attention_Is_All_You_Need.pdf,True,"Based on the provided context, the Transformer removed recurrence and convolutions because the sequential nature of recurrent architectures prevents parallelization within training examples, creating a critical bottleneck at longer sequence lengths. 
+
+By relying entirely on attention mechanisms to draw global dependencies between input and output, the Transformer:
+* Allows for significantly more parallelization during training.
+* Trains in significantly less time (and at lower training costs).
+* Achieves superior translation quality and state-of-the-art results.",5,5,huggingface,hybrid
+q6,factual,What is multi-head attention and why is it used instead of a single attention function?,Attention_Is_All_You_Need.pdf,True,"Based on the provided papers:
+
+**What Multi-Head Attention is:**
+Instead of performing a single attention function with $d_{\text{model}}$-dimensional inputs, multi-head attention linearly projects queries, keys, and values $h$ times using different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions. The attention function is then performed in parallel on each of these projected versions (heads). The resulting $d_v$-dimensional outputs are concatenated and projected again to produce the final output values.
+
+**Why it is used instead of a single attention function:**
+1. **Attending to multiple representation subspaces:** It allows the model to jointly attend to information from different representation subspaces at different positions. In a single attention head, averaging inhibits this capability.
+2. **Counteracting reduced resolution:** It counteracts the effect of reduced effective resolution that occurs due to averaging attention-weighted positions.
+3. **Computational efficiency:** By using reduced dimensions for each head ($d_k = d_v = d_{\text{model}}/h = 64$ for $h = 8$), the total computational cost remains similar to that of single-head attention with full dimensionality.",5,5,huggingface,hybrid
+q7,conceptual,How does GPT-3 perform few-shot learning without any gradient updates or fine-tuning?,GPT3_Few_Shot_Learners.pdf,True,"Based on the provided context, GPT-3 performs few-shot learning (also referred to as in-context learning) purely through text interaction at inference time. 
+
+Specifically, it works by:
+* Providing a natural language task description and a few demonstrations (typically 10 to 100 examples) as conditioning within the model's context window.
+* Evaluating the task at inference time using these text demonstrations without allowing any weight or gradient updates.",5,5,huggingface,hybrid
+q8,factual,"What is the difference between zero-shot, one-shot, and few-shot settings as evaluated in the GPT-3 paper?",GPT3_Few_Shot_Learners.pdf,True,"Based on the provided paper excerpts, the differences between the three evaluation conditions are defined by the number of demonstrations provided to the model:
+
+* **Zero-shot learning:** No demonstrations are allowed; the model is given only a natural language instruction.
+* **One-shot learning:** Only one demonstration is allowed alongside the task evaluation.
+* **Few-shot learning (in-context learning):** As many demonstrations as will fit into the model's context window are allowed (typically between 10 to 100).",5,5,huggingface,hybrid
+q9,conceptual,What is Reinforcement Learning from Human Feedback (RLHF) and how is it used to train InstructGPT?,InstructGPT.pdf,True,"Reinforcement Learning from Human Feedback (RLHF) is a technique used to align language models with human intentions and preferences. It was originally developed for training simple robots in simulated environments and Atari.
+
+To train InstructGPT, RLHF is used in the following way:
+1. **Supervised Fine-Tuning:** The model is first fine-tuned using supervised learning on a dataset of labeler-written demonstrations of desired behavior.
+2. **Reward Modeling and Further Fine-Tuning:** A dataset of rankings of model outputs is collected. This data is used to further fine-tune the supervised model using RLHF.
+3. **Mitigating Regressions:** During the PPO training phase of RLHF, pretraining gradients are mixed in to mitigate performance regressions on public NLP datasets. This involves using 8 times more pretraining examples than RL training episodes, with pretraining gradients multiplied by a coefficient of γ = 27.8.",5,5,huggingface,hybrid
+q10,conceptual,What problem does LoRA (Low-Rank Adaptation) solve when fine-tuning large language models?,LoRA.pdf,True,"LoRA addresses the issue that full fine-tuning, which requires retraining all model parameters, becomes less feasible as models grow larger. For example, deploying independent instances of a fine-tuned GPT-3 175B model is prohibitively expensive. 
+
+Additionally, LoRA avoids the drawbacks of other methods that introduce inference latency by extending model depth or reduce the model's usable sequence length. By freezing pre-trained weights and injecting trainable rank decomposition matrices, LoRA reduces the number of trainable parameters (by 10,000 times for GPT-3 175B) and GPU memory requirements (by 3 times) while maintaining or exceeding the model quality of full fine-tuning.",5,5,huggingface,hybrid
+q11,factual,How does LoRA reduce the number of trainable parameters compared to full fine-tuning?,LoRA.pdf,True,"LoRA reduces the number of trainable parameters by injecting trainable rank decomposition matrices into each layer of the Transformer architecture rather than training all parameters. By limiting the adaptation to a subset of weight matrices (such as $W_q$ and $W_v$) and utilizing a rank $r$ that is smaller than the rank of the pre-trained weight matrices, LoRA significantly decreases the parameter count. Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times.",5,5,huggingface,hybrid
+q12,unanswerable_grounding_check,What was the medal count for Team USA at the 2024 Paris Olympics?,,,I don't know based on the provided papers.,5,5,huggingface,hybrid
+q3,conceptual,"What problem with standard Retrieval-Augmented Generation does SELF-RAG aim to address, and what is its key idea?",SELF_RAG.pdf,True,"Standard Retrieval-Augmented Generation (RAG) approaches often retrieve passages indiscriminately, regardless of whether retrieval is necessary or the passages are relevant. This can lead to unhelpful, off-topic, or low-quality generations and can diminish an LM's versatility. Additionally, standard models are not explicitly trained to follow facts from retrieved passages, which can result in outputs that are inconsistent with the provided information.
+
+The key idea of SELF-RAG is to enhance an LM's quality and factual accuracy through on-demand retrieval and self-reflection. The framework trains an arbitrary LM to reflect on its own generation process by generating ""reflection tokens,"" which allow the model to critique its own generations and retrieved passages. This approach enables the model to adaptively retrieve information only when necessary and allows for the tailoring of model behavior during inference.",5,5,huggingface,hybrid
+q4,factual,"How does SELF-RAG decide on demand whether to retrieve passages for a given input, and what role do reflection tokens play in that process?",SELF_RAG.pdf,True,"SELF-RAG decides whether to retrieve passages by using reflection tokens, specifically the ""Retrieve"" token. Given an input and previous-step generation, the model determines if the continuation requires factual grounding. 
+
+The reflection tokens play the following roles in this process:
+* **Retrieval-on-demand:** The model generates a retrieval token to indicate if retrieval is necessary (""Yes""), unnecessary (""No""), or if it should continue using previously retrieved evidence (""continue"").
+* **Integration:** These tokens are unified as next-token predictions from the model's expanded vocabulary, allowing the model to signal the need for retrieval during the generation process. 
+* **Control:** By generating these tokens, the model can perform retrieval on demand rather than retrieving passages indiscriminately.",5,5,huggingface,hybrid

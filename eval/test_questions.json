@@ -1,0 +1,74 @@
+[
+  {
+    "id": "q1",
+    "question": "What are the two main pretraining tasks used to train BERT?",
+    "expected_source": "BERT.pdf",
+    "type": "factual"
+  },
+  {
+    "id": "q2",
+    "question": "How does BERT's architecture differ from standard left-to-right language models like GPT?",
+    "expected_source": "BERT.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q3",
+    "question": "What problem with standard Retrieval-Augmented Generation does SELF-RAG aim to address, and what is its key idea?",
+    "expected_source": "SELF_RAG.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q4",
+    "question": "How does SELF-RAG decide on demand whether to retrieve passages for a given input, and what role do reflection tokens play in that process?",
+    "expected_source": "SELF_RAG.pdf",
+    "type": "factual"
+  },
+  {
+    "id": "q5",
+    "question": "Why did the Transformer architecture in 'Attention Is All You Need' remove recurrence and convolutions entirely?",
+    "expected_source": "Attention_Is_All_You_Need.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q6",
+    "question": "What is multi-head attention and why is it used instead of a single attention function?",
+    "expected_source": "Attention_Is_All_You_Need.pdf",
+    "type": "factual"
+  },
+  {
+    "id": "q7",
+    "question": "How does GPT-3 perform few-shot learning without any gradient updates or fine-tuning?",
+    "expected_source": "GPT3_Few_Shot_Learners.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q8",
+    "question": "What is the difference between zero-shot, one-shot, and few-shot settings as evaluated in the GPT-3 paper?",
+    "expected_source": "GPT3_Few_Shot_Learners.pdf",
+    "type": "factual"
+  },
+  {
+    "id": "q9",
+    "question": "What is Reinforcement Learning from Human Feedback (RLHF) and how is it used to train InstructGPT?",
+    "expected_source": "InstructGPT.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q10",
+    "question": "What problem does LoRA (Low-Rank Adaptation) solve when fine-tuning large language models?",
+    "expected_source": "LoRA.pdf",
+    "type": "conceptual"
+  },
+  {
+    "id": "q11",
+    "question": "How does LoRA reduce the number of trainable parameters compared to full fine-tuning?",
+    "expected_source": "LoRA.pdf",
+    "type": "factual"
+  },
+  {
+    "id": "q12",
+    "question": "What was the medal count for Team USA at the 2024 Paris Olympics?",
+    "expected_source": null,
+    "type": "unanswerable_grounding_check"
+  }
+]
