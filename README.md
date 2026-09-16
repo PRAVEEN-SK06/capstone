@@ -82,9 +82,10 @@ Run the evaluation harness:
 python eval/evaluate.py --embedding huggingface --strategy hybrid
 ```
 
-Regenerate the notebook after changing `src/`:
+Regenerate the notebook after changing `src/` (needs the extra dev dependencies):
 
 ```bash
+pip install -r requirements-dev.txt
 python scripts/gen_notebook.py
 ```
 

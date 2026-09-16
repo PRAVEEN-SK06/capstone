@@ -1,0 +1,8 @@
+# Extra dependencies for notebook generation/execution during development
+# only — not needed to run the deployed app (app.py), so kept out of
+# requirements.txt to keep the deployment's dependency tree small and to
+# avoid version-resolution conflicts on hosts like Streamlit Cloud.
+-r requirements.txt
+nbformat==5.10.4
+ipykernel==6.29.5
+nbconvert==7.16.4
