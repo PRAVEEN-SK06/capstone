@@ -4,7 +4,7 @@ Two models are supported end-to-end, per the capstone's compulsory
 requirement to compare an open-source and a commercial embedding model:
 
 * "huggingface" -> BAAI/bge-small-en-v1.5, runs 100% locally on CPU, free.
-* "gemini"      -> Google's text-embedding-004, commercial API, needs a key.
+* "gemini"      -> Google's gemini-embedding-001, commercial API, needs a key.
 """
 from __future__ import annotations
 

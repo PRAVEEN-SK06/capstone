@@ -70,7 +70,7 @@ with st.sidebar:
 
     st.subheader("Embedding model")
     embed_options = available_embedders()
-    embed_labels = {"huggingface": "HuggingFace (BAAI/bge-small, local, free)", "gemini": "Gemini (text-embedding-004, commercial)"}
+    embed_labels = {"huggingface": "HuggingFace (BAAI/bge-small, local, free)", "gemini": "Gemini (gemini-embedding-001, commercial)"}
     embedding_name = st.radio(
         "Embedding model",
         embed_options,

@@ -185,7 +185,7 @@ We compare two embedding models end-to-end, as required:
 
 * **Open-source (HuggingFace):** `BAAI/bge-small-en-v1.5` — runs 100% locally
   on CPU, zero API cost.
-* **Commercial (Google):** `text-embedding-004` — via the Gemini API.
+* **Commercial (Google):** `gemini-embedding-001` — via the Gemini API.
 
 ### Step 4: Vector Database
 
@@ -304,7 +304,7 @@ md(
 
 ### Step 6: RAG Pipeline Construction
 
-`src/rag_chain.py` wires the retriever to **Gemini 2.0 Flash** with a strict
+`src/rag_chain.py` wires the retriever to **Gemini Flash** (see `GEMINI_LLM_MODEL` in `src/config.py` for the exact pinned snapshot) with a strict
 grounding prompt (answer only from context; say "I don't know based on the
 provided papers" otherwise; cite passages by paper + page). The chain
 returns the answer plus the top-3 supporting passages, each with paper
